@@ -1,7 +1,4 @@
-Absolutely! Here’s a **clean, professional, and concise `README.md`** you can copy-paste as your main documentation for the project.
-This version covers project scope, setup, usage, LLM/embedding choices, and “what next” for the interviewers.
 
----
 
 ```markdown
 # MAG7 Financial SEC Filings Q&A Agent
@@ -112,7 +109,7 @@ docker run -it --env-file .env -p 8501:8501 mag7_app
 ## 🚀 Next Steps (Future Work)
 
 * Add support for Groq, Gemini, Claude, and other open/free LLM APIs.
-* Extend parser for XBRL filings (post-2019 SEC format).
+* Extend parser for XBRL filings (post-2018 SEC format).
 * Add a web front-end (e.g., Streamlit, Gradio) for broader usability.
 
 ---
@@ -127,10 +124,4 @@ No proprietary or sensitive data included.
 **Questions?**
 Contact: Sachin Kumar Singh
 
-```
-
----
-
-Let me know if you want a more detailed “Usage” or setup, or want a minimal or web-app-optimized version!  
-You can just paste this into `README.md` and you’re set for a professional submission.
 ```
