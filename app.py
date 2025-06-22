@@ -1,11 +1,37 @@
+"""
+MAG7 SEC Financial Filings Conversational Agent
+
+- Loads vector store (FAISS) of embedded SEC filings for the 'Magnificent 7' companies.
+- Supports multi-turn, citation-aware Q&A using Groq Llama-3.
+- Input: User queries via CLI. Output: JSON with answer, sources, and confidence.
+"""
+
+
 import os
 import json
-# Import LangChain modules (community versions as per latest best practices)
-from langchain_community.chat_models import ChatOpenAI
+
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langchain.prompts import PromptTemplate
+from langchain_groq import ChatGroq
+
+
+def get_llm():
+    """
+    Returns a language model instance.
+    Uses Groq (Llama-3) if GROQ_API_KEY is set
+    """
+    groq_api_key = os.getenv("GROQ_API_KEY")
+    if groq_api_key:
+        print("🔷 Using Groq (Llama-3-70B-8192) for LLM Q&A")
+        return ChatGroq(model="llama3-70b-8192", api_key=groq_api_key)
+    else:
+        raise ValueError(
+            "❌ GROQ_API_KEY is not set. Please set it in your .env file to use this agent."
+        )
+
+
 
 # Set up directory and embeddings for vector search
 OUTPUT_DIR = "output"
@@ -71,7 +97,7 @@ User question: {query}
 
 # Set up the LLM (uses OpenAI GPT-4 Mini, but you can change the model)
 # Make sure OPENAI_API_KEY is set in your environment (or .env file)!
-model = ChatOpenAI(model="gpt-4.1-mini")  # Or your OpenAI API/model
+model = get_llm()
 
 # In-memory chat history for context-aware dialogue (multi-turn support)
 chat_history = []

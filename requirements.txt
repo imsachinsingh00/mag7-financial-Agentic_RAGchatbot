@@ -29,3 +29,4 @@ transformers
 pydeck
 python-json-logger
 pytz
+langchain-groq
