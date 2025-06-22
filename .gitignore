@@ -1,6 +1,6 @@
 .env
 
-output/
+# output/
 mag7_filing_metadata.json
 
 
